@@ -1,12 +1,10 @@
-This program is used to automate the processing of team ranking information.
+This program is used to automate the processing of team ranking information in an environment where the team members (A.K.A "flight members") are tasked with ranking
+their flight mates, including themself.
 
-The team I will be leading ("flight") is tasked with ranking everyone in the flight, including themselves, each week. In order to share feedback with each member effectively,
-I wanted to be able to show them their ranking according to the other flight members. 
+When run, the program processes the rankings found in the directoryIn folder (all .xlsx files) and creates a new folder called ProcessedData with a .xlsx for each week
+of rankings as well as a summary that tracks each flight member's progression over the weeks of ranking.
 
-The program processes all .xlsx files in a folder and creates corresponding output spreadsheet with a worksheet for each member of the flight. Their sheet shows them their 
-average rank, how they ranked their peers and themself, and a histogram of how their peers ranked them. 
+The next step is to make the program more fool proof by detecting an error in the ranking inputs such as repeated names or missing names. I would also like it to account
+for the possibility of flight members dropping out midsemester, which will be reflected in the following weekly rankings. I would also like it to be more flexible with contingencies such as members not having to rank themself.
 
-I want to further the automation by tracking the previous weeks so that by the end of the semester, each flight memeber can see a graph of how their ranking progressed throughout
-the semester.
-
-More instructions to come :)
+More to come :)
