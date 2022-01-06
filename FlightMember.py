@@ -11,7 +11,7 @@ class FlightMember:
         self.ROSTER_LENGTH = len(self.ranking)
         self.rank = []  # Others' ranking of member
         self.getRank()
-        self.avgRank = sum(self.rank) / len(self.rank)
+        self.avgRank = round(sum(self.rank) / len(self.rank), 2)
         self.fillSheet()  # Create sheet for member on output xlsx
 
     def getRanking(self):
@@ -82,3 +82,6 @@ class FlightMember:
 
     def getAvg(self):
         return self.avgRank
+
+    def getSelfRank(self):
+        return self.selfRanking
