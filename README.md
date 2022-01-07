@@ -25,7 +25,7 @@ used to number the rows.
 
 Example:
 
-        Williams  Johnson   Rodriguez
+Members Williams  Johnson   Rodriguez
 1       Johnson   Rodriguez Rodriguez
 2       Williams  Williams  Johnson
 3       Rodriguez Johnson   Williams
