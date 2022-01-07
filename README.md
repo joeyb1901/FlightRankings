@@ -20,15 +20,6 @@ are in a ranking or if not all members were ranked by someone.
 
 INPUT FILE FORMATTING:
 
-On the active sheet of the .xlsx workbook (usually called 'Sheet1') input the rankings of each flight. Row 1 is the name of the member with their rankings below. Column 1 is
-used to number the rows.
-
-Example:
-
-Members Williams  Johnson   Rodriguez
-1       Johnson   Rodriguez Rodriguez
-2       Williams  Williams  Johnson
-3       Rodriguez Johnson   Williams
-
+On the active sheet of the .xlsx workbook (usually called 'Sheet1') input the rankings of each flight. Row 1 (starting with column B) is the names of the members with their rankings below. Column A (starting with row 2) is just numbers for reference.
 
 Let me know if anyone puts this to use and how it works out! Enjoy.
