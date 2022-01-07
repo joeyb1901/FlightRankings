@@ -4,9 +4,6 @@ from modules import processWorkbook, createSummary
 
 directory = r'C:\Users\joeyb\iCloudDrive\S6_TTU Spring 2022\AFROTC\_FTP FLT Files'
 
-# TODO: Account for cadets dropping midway through the semester
-# TODO: Catch errors in input workbooks such as repeated or missing names
-
 def main():
     # Loop through files in RawRankingData to process
     directoryIn = directory + '\RawRankingData'

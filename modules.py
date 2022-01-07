@@ -18,11 +18,19 @@ def processWorkbook(directory, wb, Filename):
     selfRanks = []
     for col in range(2, rawNames.max_column + 1):  # Loop through columns of raw rankings
         cell = rawNames.cell(1, col)
-        member = FlightMember(rawNames, wbOut, cell.value)  # Establish flt member and preform rank processing
         roster.append(cell.value)  # Adds name to roster
-        avgRanks.append(FlightMember.getAvg(member))  # Adds corresponding avg rank to list
-        selfRanks.append(FlightMember.getSelfRank(member))
-    avgRanks_ordered, roster_ordered = orderSimultaneously(avgRanks, roster)  # Order lists according to avg rank
+    for col in range(2, rawNames.max_column + 1):  # Loop through columns of raw rankings
+        cell = rawNames.cell(1, col)
+        member = FlightMember(rawNames, wbOut, cell.value, Filename)  # Establish flt member and preform rank processing
+        avgRanks.append(member.avgRank)  # Adds corresponding avg rank to list
+        selfRanks.append(member.selfRanking)
+        # Check for missing names in ranking
+        s = set(member.ranking)
+        missing = [x for x in roster if x not in s]
+        if missing:  # List is not empty
+            print("[ERROR] ({}) Missing name from {}'s ranking: {}".format(member.filename, member.name, missing))
+    # Order lists according to avg rank
+    avgRanks_ordered, roster_ordered = orderSimultaneously(avgRanks, roster)
     # Add Flight Info
     flightInfo(fltSheet, avgRanks_ordered, roster_ordered)  # Pass ordered roster & ranks
     # Save workbook
@@ -92,7 +100,6 @@ def fillSheet(wb, member, rank, selfRank, count):
     template.update({'B1': member})
     # Graph stuff
     chart = LineChart()
-    chart.type = 13
     chart.style = 10
     chart.title = "Ranking Tracker: {}".format(member)
     chart.y_axis.title = 'Rank'

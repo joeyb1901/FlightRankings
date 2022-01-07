@@ -1,15 +1,17 @@
 from openpyxl.chart import BarChart, Reference
 
 class FlightMember:
-    def __init__(self, rawNames, outputWB, name):
+    def __init__(self, rawNames, outputWB, name, filename):
+        self.filename = filename
         self.name = name
         self.sheet = outputWB.create_sheet(self.name)  # Create a worksheet for flight member
         self.rawNames = rawNames  # xlsx of names (row 1 is ranker, col 1 is numbers)
         self.ranking = []  # Member's ranking of others
         self.selfRanking = None  # How they rank themself
-        self.getRanking()
+        self.getRanking()  # How they rank their flight
+        self.findDuplicates()  # Check the ranking for duplicate names
         self.ROSTER_LENGTH = len(self.ranking)
-        self.rank = []  # Others' ranking of member
+        self.rank = []  # Others' ranking of the member
         self.getRank()
         self.avgRank = round(sum(self.rank) / len(self.rank), 2)
         self.fillSheet()  # Create sheet for member on output xlsx
@@ -25,6 +27,12 @@ class FlightMember:
                     if cell.value == self.name:  # Find self ranking
                         self.selfRanking = row - 1
                 break  # Skips unnecessary columns
+
+    def findDuplicates(self):
+        seen = set()  # list of seen names in ranking
+        dupes = [x for x in self.ranking if x in seen or seen.add(x)]
+        if dupes:  # List is not empty
+            print("[ERROR] ({}) Duplicates found in {}'s ranking: {}".format(self.filename, self.name, dupes))
 
     def getRank(self):
         # Loop through all ranking lists in rawNames to generate list of ranks for this member
@@ -79,9 +87,3 @@ class FlightMember:
         chart.set_categories(labels)
         # Add chart to xlsx
         self.sheet.add_chart(chart, 'F2')
-
-    def getAvg(self):
-        return self.avgRank
-
-    def getSelfRank(self):
-        return self.selfRanking
